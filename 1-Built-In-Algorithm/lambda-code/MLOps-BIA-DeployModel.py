@@ -237,13 +237,17 @@ def write_job_info_s3(event):
     object.put(Body=json_data, ServerSideEncryption='aws:kms', SSEKMSKeyId=S3SSEKey)
     print('event written to s3')
 
+
 def put_job_success(event):
     
     print("[SUCCESS]Endpoint Deployed")
     print(event['message'])
     code_pipeline.put_job_success_result(jobId=event['CodePipeline.job']['id'])
 
+
 def put_job_failure(event):  
     print('[ERROR]Putting job failure')
     print(event['message'])
     code_pipeline.put_job_success_result(jobId=event['CodePipeline.job']['id'])
+
+
